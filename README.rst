@@ -1,0 +1,21 @@
+template_project
+================
+
+The title of the project if `template_project`
+The name of the package that will be installed is `template_package`.
+The template assumes a repo structure with a single top package.
+The project metadata are stored in the `package.py` in the top package.
+
+* `pip3 install pre-commit` (if needed)
+* customize the template modifying the `package.py` file in
+  the `template_package` dir
+* `git init`
+* activate a virtual environment (venv or conda)
+* `pre-commit install`
+* `pre-commit autoupdate`
+* `pip install -r dev-requirements`
+
+Now you should be able to install everything in the virtual
+environment using `pip install .`
+(or `pip install -e .` for development)
+
