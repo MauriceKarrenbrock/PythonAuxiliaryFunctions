@@ -7,9 +7,10 @@ The template assumes a repo structure with a single top package
 (and subpackages).
 The project metadata are stored in the `package.py` in the top package.
 
+* `pip3 install pre-commit`
+* `git clone https://github.com/neat-worflows/template_project.git`
 * `mv template_project <your project>`
 * `cd <your project>`
-* `pip3 install pre-commit`
 * customize the template modifying the `package.py` file in
   the `template_package` dir
 * `mv template_package <your package>`
