@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """Template package file"""
-__title__ = 'python_auxiliary_functions'
+__title__ = 'PythonAuxiliaryFunctions'
 __version__ = '0.1'
 __author__ = 'Maurice Karrenbrock'
 __summary__ = ''
-__url__ = 'https://github.com/MauriceKarrenbrock/python_auxiliary_functions.git'
+__url__ = 'https://github.com/MauriceKarrenbrock/PythonAuxiliaryFunctions.git'
 __email__ = ''
 __license__ = 'BSD 3-Clause'
 __copyright__ = 'Copyright (c) 2020, Maurice Karrenbrock'
