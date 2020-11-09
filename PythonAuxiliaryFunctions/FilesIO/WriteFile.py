@@ -20,19 +20,13 @@ def write_file(lines, file_name='file.txt'):
     Parameters
     -----------
     lines : iterable of strings or str
-        anything that supports iteration like lists, tuples etc or a single string
     file_name : str
         default "new_file.txt"
     """
 
-    if isinstance(lines, str):
-        lines = [lines]
-
     with open(file_name, 'w') as f:
 
-        for line in lines:
-
-            f.write(line)
+        f.writelines(lines)
 
 
 def append_file(lines, file_name='file.txt'):
@@ -43,16 +37,10 @@ def append_file(lines, file_name='file.txt'):
     Parameters
     -----------
     lines : iterable of strings or str
-        anything that supports iteration like lists, tuples etc or a single string
     file_name : str
         default "new_file.txt"
     """
 
-    if isinstance(lines, str):
-        lines = [lines]
-
     with open(file_name, 'a') as f:
 
-        for line in lines:
-
-            f.write(line)
+        f.writelines(lines)

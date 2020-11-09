@@ -26,8 +26,7 @@ def subprocess_run(commands,
     ----------------
     commands : list
         it is the list of strings containing the command that
-        subprocess.run will run (if it is a list of list [[],[],...]
-        each element will be a new subprocess.run)
+        subprocess.run will run
     shell : bool
         default False, if == True the commands will be executed in the shell
     universal_newlines : bool
@@ -42,37 +41,17 @@ def subprocess_run(commands,
     RuntimeError
         if the return code of the cild process is != 0
     """
-    def _run(_command, _shell, _universal_newlines, _error_string, _cwd):
-        """Private
-        """
 
-        r = subprocess.run(_command,
-                           shell=_shell,
-                           stdout=subprocess.PIPE,
-                           stderr=subprocess.PIPE,
-                           universal_newlines=_universal_newlines,
-                           cwd=_cwd,
-                           check=False)
+    r = subprocess.run(commands,
+                       shell=shell,
+                       stdout=subprocess.PIPE,
+                       stderr=subprocess.PIPE,
+                       universal_newlines=universal_newlines,
+                       cwd=cwd,
+                       check=False)
 
-        print(r.stdout)
-        print(r.stderr)
+    print(r.stdout)
+    print(r.stderr)
 
-        if r.returncode != 0:
-            raise RuntimeError(_error_string)
-
-    if isinstance(commands[0], list):
-
-        for command in commands:
-            _run(_command=command,
-                 _shell=shell,
-                 _universal_newlines=universal_newlines,
-                 _error_string=error_string,
-                 _cwd=cwd)
-
-    else:
-
-        _run(_command=commands,
-             _shell=shell,
-             _universal_newlines=universal_newlines,
-             _error_string=error_string,
-             _cwd=cwd)
+    if r.returncode != 0:
+        raise RuntimeError(error_string)
