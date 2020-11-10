@@ -41,9 +41,9 @@ def absolute_filepath(path):
 
 
 def which(program):
-    """get the absolute path of an executable that is in $PATH
+    """get the absolute path of an executable that is in $path
 
-    If you don't know if the program is in $PATH or not use absolute_programpath(program)
+    If you don't know if the program is in $path or not use absolute_programpath(program)
     Uses shutil.which
     example: path = which("python"), path = /usr/bin/python
     If the executable doesn't exist raises a OSError
@@ -51,7 +51,7 @@ def which(program):
     Parameters
     ---------------------
     program : str
-        the name of the program you have in $PATH and that you want
+        the name of the program you have in $path and that you want
         to have the absolute path of
 
     Returns
@@ -67,13 +67,13 @@ def which(program):
     absolute_path = shutil.which(program)
 
     if absolute_path is None:
-        raise OSError(f'{program} is not in $PATH')
+        raise OSError(f'{program} is not in $path')
 
     return absolute_path
 
 
 def absolute_programpath(program):
-    """It returns the absolute path to an executable both if it is in $PATH or not
+    """It returns the absolute path to an executable both if it is in $path or not
 
     if the executable doesn't exist raises an OSError
     it is a handy wrapper of `which` and `absolute_filepath`
@@ -81,13 +81,13 @@ def absolute_programpath(program):
     Parameters
     ------------------
     program : str
-        can be the name of the executable in $PATH
+        can be the name of the executable in $path
         or a relative path to it
 
     Raises
     --------------
     OSError
-        if the executable doesn't exist both in $PATH nor in the
+        if the executable doesn't exist both in $path nor in the
         relative path given as input
     """
 
@@ -104,7 +104,7 @@ def absolute_programpath(program):
     except FileNotFoundError:
 
         raise OSError(
-            f"{program} doesn't exist both in PATH and in the normal directories"
+            f"{program} doesn't exist both in path and in the normal directories"
         )
 
     return absolute_path

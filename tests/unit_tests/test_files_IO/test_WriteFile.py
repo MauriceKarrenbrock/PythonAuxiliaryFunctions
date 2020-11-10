@@ -11,10 +11,10 @@
 
 import pytest
 
-import PythonAuxiliaryFunctions.FilesIO.WriteFile as WriteFile
+import PythonAuxiliaryFunctions.files_IO.write_file as write_file
 
 
-class TestWriteFile():
+class Testwrite_file():
     @pytest.mark.parametrize('test_type, lines', [('string', 'test'),
                                                   ('list', ['test', 'list'])])
     def test_works(self, mocker, test_type, lines):
@@ -22,9 +22,9 @@ class TestWriteFile():
         print('Logging test type for visibility: ' + test_type)
 
         mocked_open = mocker.patch(
-            'PythonAuxiliaryFunctions.FilesIO.WriteFile.open')
+            'PythonAuxiliaryFunctions.files_IO.write_file.open')
 
-        WriteFile.write_file(lines, 'file.txt')
+        write_file.write_file(lines, 'file.txt')
 
         mocked_open.assert_called()
 
@@ -37,8 +37,8 @@ class TestAppendFile():
         print('Logging test type for visibility: ' + test_type)
 
         mocked_open = mocker.patch(
-            'PythonAuxiliaryFunctions.FilesIO.WriteFile.open')
+            'PythonAuxiliaryFunctions.files_IO.write_file.open')
 
-        WriteFile.append_file(lines, 'file.txt')
+        write_file.append_file(lines, 'file.txt')
 
         mocked_open.assert_called()

@@ -9,22 +9,22 @@
 # BSD 3-Clause "New" or "Revised" License                   #
 #############################################################
 
-import PythonAuxiliaryFunctions.GetIterable as GetIterable
+import PythonAuxiliaryFunctions.get_iterable as get_iterable
 
 
-class TestGetIterable():
+class Testget_iterable():
     def test_with_string(self):
 
-        assert GetIterable.get_iterable('string') == ('string', )
+        assert get_iterable.get_iterable('string') == ('string', )
 
     def test_with_empty_list(self):
 
-        assert GetIterable.get_iterable([]) == []
+        assert get_iterable.get_iterable([]) == []
 
     def test_with_list(self):
 
-        assert GetIterable.get_iterable([1, 2]) == [1, 2]
+        assert get_iterable.get_iterable([1, 2]) == [1, 2]
 
     def test_with_int(self):
 
-        assert GetIterable.get_iterable(1) == (1, )
+        assert get_iterable.get_iterable(1) == (1, )

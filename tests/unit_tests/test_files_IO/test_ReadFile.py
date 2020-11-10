@@ -9,15 +9,15 @@
 # BSD 3-Clause "New" or "Revised" License                   #
 #############################################################
 
-import PythonAuxiliaryFunctions.FilesIO.ReadFile as ReadFile
+import PythonAuxiliaryFunctions.files_IO.read_file as read_file
 
 
-class TestReadFile():
+class Testread_file():
     def test_works(self, mocker):
 
         mocked_open = mocker.patch(
-            'PythonAuxiliaryFunctions.FilesIO.ReadFile.open')
+            'PythonAuxiliaryFunctions.files_IO.read_file.open')
 
-        ReadFile.read_file(file_name='DUM')
+        read_file.read_file(file_name='DUM')
 
         mocked_open.assert_called()

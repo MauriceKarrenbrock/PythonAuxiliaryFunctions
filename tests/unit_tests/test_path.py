@@ -11,7 +11,7 @@
 
 import pytest
 
-import PythonAuxiliaryFunctions.Path as Path
+import PythonAuxiliaryFunctions.path as path
 
 
 class TestAbsoluteFilepath():
@@ -21,7 +21,7 @@ class TestAbsoluteFilepath():
 
         with pytest.raises(FileNotFoundError):
 
-            Path.absolute_filepath('DUM')
+            path.absolute_filepath('DUM')
 
     def test_works(self, mocker):
 
@@ -31,7 +31,7 @@ class TestAbsoluteFilepath():
         mocker.patch('os.path.expanduser')
         mocker.patch('os.path.expandvars')
 
-        assert Path.absolute_filepath('DUM') == 'true_path'
+        assert path.absolute_filepath('DUM') == 'true_path'
 
 
 class TestWhich():
@@ -41,13 +41,13 @@ class TestWhich():
 
         with pytest.raises(OSError):
 
-            Path.which('DUM')
+            path.which('DUM')
 
     def test_works(self, mocker):
 
         mocked_which = mocker.patch('shutil.which', return_value='true_path')
 
-        assert Path.which('DUM') == 'true_path'
+        assert path.which('DUM') == 'true_path'
 
         mocked_which.assert_called_once()
 
@@ -55,34 +55,34 @@ class TestWhich():
 class TestAbsoluteProgrampath():
     def test_raises(self, mocker):
 
-        mocker.patch('PythonAuxiliaryFunctions.Path.absolute_filepath',
+        mocker.patch('PythonAuxiliaryFunctions.path.absolute_filepath',
                      side_effect=FileNotFoundError)
 
-        mocker.patch('PythonAuxiliaryFunctions.Path.which',
+        mocker.patch('PythonAuxiliaryFunctions.path.which',
                      side_effect=OSError)
 
         with pytest.raises(OSError):
 
-            Path.absolute_programpath('DUM')
+            path.absolute_programpath('DUM')
 
     def test_which(self, mocker):
 
-        mocked_wich = mocker.patch('PythonAuxiliaryFunctions.Path.which',
+        mocked_wich = mocker.patch('PythonAuxiliaryFunctions.path.which',
                                    return_value='true_path')
 
-        assert Path.which('DUM') == 'true_path'
+        assert path.which('DUM') == 'true_path'
 
         mocked_wich.assert_called_once_with('DUM')
 
     def test_absolute_filepath(self, mocker):
 
-        mocker.patch('PythonAuxiliaryFunctions.Path.which',
+        mocker.patch('PythonAuxiliaryFunctions.path.which',
                      side_effect=OSError)
 
         mocked_path = mocker.patch(
-            'PythonAuxiliaryFunctions.Path.absolute_filepath',
+            'PythonAuxiliaryFunctions.path.absolute_filepath',
             return_value='true_path')
 
-        assert Path.absolute_filepath('DUM') == 'true_path'
+        assert path.absolute_filepath('DUM') == 'true_path'
 
         mocked_path.assert_called_once_with('DUM')

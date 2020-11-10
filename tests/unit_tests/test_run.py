@@ -13,24 +13,24 @@ import unittest.mock as mock
 
 import pytest
 
-import PythonAuxiliaryFunctions.Run as Run
+import PythonAuxiliaryFunctions.run as run
 
 
-class TestSubprocessRun():
+class TestSubprocessrun():
     def test_raises(self, mocker):
 
         return_object = mock.MagicMock()
         return_object.returncode = 1
 
         mocked_run = mocker.patch(
-            'PythonAuxiliaryFunctions.Run.subprocess.run',
+            'PythonAuxiliaryFunctions.run.subprocess.run',
             return_value=return_object)
 
-        mocked_print = mocker.patch('PythonAuxiliaryFunctions.Run.print')
+        mocked_print = mocker.patch('PythonAuxiliaryFunctions.run.print')
 
         with pytest.raises(RuntimeError):
 
-            Run.subprocess_run(['a', 'b'])
+            run.subprocess_run(['a', 'b'])
 
         mocked_run.assert_called_once()
 
@@ -42,12 +42,12 @@ class TestSubprocessRun():
         return_object.returncode = 0
 
         mocked_run = mocker.patch(
-            'PythonAuxiliaryFunctions.Run.subprocess.run',
+            'PythonAuxiliaryFunctions.run.subprocess.run',
             return_value=return_object)
 
-        mocked_print = mocker.patch('PythonAuxiliaryFunctions.Run.print')
+        mocked_print = mocker.patch('PythonAuxiliaryFunctions.run.print')
 
-        Run.subprocess_run(['a', 'b'])
+        run.subprocess_run(['a', 'b'])
 
         mocked_run.assert_called_once()
 
