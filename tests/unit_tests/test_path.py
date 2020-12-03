@@ -9,6 +9,8 @@
 # BSD 3-Clause "New" or "Revised" License                   #
 #############################################################
 
+import pathlib
+
 import pytest
 
 import PythonAuxiliaryFunctions.path as path
@@ -25,13 +27,17 @@ class TestAbsoluteFilepath():
 
     def test_works(self, mocker):
 
-        mocker.patch('os.path.exists', return_value=True)
+        mocker.patch.object(pathlib.Path, 'exists', return_value=True)
 
-        mocker.patch('os.path.abspath', return_value='true_path')
-        mocker.patch('os.path.expanduser')
-        mocker.patch('os.path.expandvars')
+        mocker.patch.object(pathlib.Path,
+                            'resolve',
+                            return_value=pathlib.Path('true_path'))
+        mocker.patch.object(pathlib.Path,
+                            'expanduser',
+                            return_value=pathlib.Path)
+        mocker.patch('os.path.expandvars', return_value='DUM')
 
-        assert path.absolute_filepath('DUM') == 'true_path'
+        assert path.absolute_filepath('DUM') == pathlib.Path('true_path')
 
 
 class TestWhich():
@@ -47,7 +53,7 @@ class TestWhich():
 
         mocked_which = mocker.patch('shutil.which', return_value='true_path')
 
-        assert path.which('DUM') == 'true_path'
+        assert path.which('DUM') == pathlib.Path('true_path')
 
         mocked_which.assert_called_once()
 

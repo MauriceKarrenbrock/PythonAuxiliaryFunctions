@@ -9,6 +9,7 @@
 """
 
 import os.path
+import pathlib
 import shutil
 
 
@@ -23,7 +24,10 @@ def absolute_filepath(path):
 
     Returns
     ------------------
-    absolute_path : str
+    absolute_path : pathlib.Path
+        all ambient variables are resolved
+        user variables (~ in linux) are resolved
+        the path is absolute
 
     Raises
     ---------------
@@ -31,10 +35,19 @@ def absolute_filepath(path):
         if the file is not found
     """
 
-    absolute_path = os.path.abspath(
-        os.path.expanduser(os.path.expandvars(path)))
+    if not isinstance(path, str):
 
-    if not os.path.exists(absolute_path):
+        path = str(path)
+
+    path = os.path.expandvars(path)
+
+    absolute_path = pathlib.Path(path)
+
+    absolute_path = absolute_path.expanduser()
+
+    absolute_path = absolute_path.resolve()
+
+    if not absolute_path.exists():
         raise FileNotFoundError(f'{absolute_path}')
 
     return absolute_path
@@ -56,7 +69,7 @@ def which(program):
 
     Returns
     ------------
-    absolute_path : str
+    absolute_path : pathlib.Path
 
     Raises
     ---------
@@ -69,7 +82,7 @@ def which(program):
     if absolute_path is None:
         raise OSError(f'{program} is not in $path')
 
-    return absolute_path
+    return pathlib.Path(absolute_path)
 
 
 def absolute_programpath(program):
@@ -83,6 +96,10 @@ def absolute_programpath(program):
     program : str
         can be the name of the executable in $path
         or a relative path to it
+
+    Returns
+    ------------
+    absolute_path : pathlib.Path
 
     Raises
     --------------
