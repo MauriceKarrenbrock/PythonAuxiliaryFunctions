@@ -8,7 +8,7 @@
 """Contains the function to get an iterable
 """
 
-import collections
+import collections.abc
 
 
 def get_iterable(x):
@@ -29,7 +29,7 @@ def get_iterable(x):
 
     output = x
 
-    if isinstance(x, str) or not isinstance(x, collections.Iterable):
+    if isinstance(x, str) or not isinstance(x, collections.abc.Iterable):
 
         output = (x, )
 
