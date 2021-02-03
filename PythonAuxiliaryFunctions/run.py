@@ -8,15 +8,15 @@
 """Contains the functions needed to run external programs
 """
 
-import os
 import subprocess
+from pathlib import Path
 
 
 def subprocess_run(commands,
                    shell=False,
                    universal_newlines=True,
                    error_string='error during the call of an external program',
-                   cwd=os.getcwd()):
+                   cwd=None):
     """runs an external program using subprocess.run
 
     if it fails will print the standard output, standard error
@@ -33,14 +33,18 @@ def subprocess_run(commands,
         default False
     error_string : str
         the sting to give to the RuntimeError as argument
-    cwd : str
-        default the current working directory, it is the working directory for the child process
+    cwd : str or path, optional, default=current working directory
+        it is the working directory for the child process
 
     Raises
     ---------------
     RuntimeError
         if the return code of the cild process is != 0
     """
+
+    if cwd is None:
+
+        cwd = Path.cwd()
 
     r = subprocess.run(commands,
                        shell=shell,
