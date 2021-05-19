@@ -14,13 +14,13 @@ import shutil
 
 
 def absolute_filepath(path):
-    """Takes a string and returns the absolute path of the file
+    """Takes a string or a pathlib.Path and returns the absolute path of the file
 
     If the file does not exist raises a FileNotFoundError
 
     Parameters
     --------------
-    path : str
+    path : str or pathlib.Path
 
     Returns
     ------------------
@@ -120,7 +120,7 @@ def absolute_programpath(program):
 
     except FileNotFoundError:
 
-        raise OSError(
+        raise OSError(  # pylint:disable=raise-missing-from
             f"{program} doesn't exist both in path and in the normal directories"
         )
 
