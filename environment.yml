@@ -1,0 +1,7 @@
+name: PythonAuxiliaryFunctions
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - pip
+  - python
